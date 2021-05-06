@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function event_block_preprocess_page(&$vars)
+{
+    if (\Drupal\block\Entity\Block::load('event_block_1') == null){
+        $values = array(
+            // A unique ID for the block instance.
+            'id' => 'event_block_1',
+            // The plugin block id as defined in the class.
+            'plugin' => 'event_block',
+            // The machine name of the theme region.
+            'region' => 'sidebar_first',
+            'settings' => array(
+                'label' => 'Event block',
+            ),
+            // The machine name of the theme.
+            'theme' => 'bartik',
+            'visibility' => array(
+                'node_type' => array(
+                    'id' => 'node_type',
+                    'bundles' => array(
+                        'event' => 'event',
+                    ),
+                    'negate' => false,
+                    'context_mapping' => array(
+                        'node' => '@node.node_route_context:node'
+                    )
+                )
+            ),
+            'weight' => 0
+        );
+        $block = \Drupal\block\Entity\Block::create($values);
+        $block->save();
+    }
+}

@@ -1,0 +1,3 @@
+services:
+  event_block.helper_functions:
+    class: Drupal\event_block\Utils\EventHelperFunctions
